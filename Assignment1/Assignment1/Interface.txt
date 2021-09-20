@@ -1,0 +1,15 @@
+1. An Interface is a completely "abstract class", which can only contain abstract methods and properties.
+By default, members of an interface are abstract and public.
+Interfaces can contain properties and methods, but not fields.
+To access the interface methods, the interface must be "implemented" by another class. 
+To implement an interface, use the : symbol (just like with inheritance). 
+The body of the interface method is provided by the "implement" class.
+
+Benifits of Interface:
+1) To achieve security - hide certain details and only show the important details of an object (interface).
+
+2) C# does not support "multiple inheritance" (a class can only inherit from one base class). 
+However, it can be achieved with interfaces, because the class can implement multiple interfaces.
+
+3) Interfaces enable parallel application development.
+
