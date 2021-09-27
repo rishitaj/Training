@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.IO;
+using System.Reflection;
 
 namespace Thread_Task
 {
@@ -22,6 +23,7 @@ namespace Thread_Task
             t1.Start(n);
             t2.Start(n);
             Task evenfunc = new Task(n);
+
             Console.Read();
    
         }
