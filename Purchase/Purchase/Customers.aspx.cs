@@ -12,18 +12,19 @@ namespace Purchase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            DbConnection dbConnection = new DbConnection();
-            DataTable dt = dbConnection.GetSalesmanId();
-            DDlSalesmanID.Items.Add("--Select--");
-            for (int i = 0; i < dt.Rows.Count; i++)
+            if(!IsPostBack)
             {
-                DDlSalesmanID.Items.Add(new ListItem(dt.Rows[i][0].ToString() + "-" + dt.Rows[i][1].ToString(), dt.Rows[i][0].ToString()));
+                DbConnection dbConnection = new DbConnection();
+                DataTable dt = dbConnection.GetSalesmanId();
+                DDlSalesmanID.Items.Add("--Select--");
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    DDlSalesmanID.Items.Add(new ListItem(dt.Rows[i][0].ToString() + "-" + dt.Rows[i][1].ToString(), dt.Rows[i][0].ToString()));
+                }
+                DataTable DBCustomersDetails = dbConnection.GetCustomerDetails();
+                GVCustomerDetails.DataSource = DBCustomersDetails;
+                GVCustomerDetails.DataBind();
             }
-            DataTable DBCustomersDetails = dbConnection.GetCustomerDetails();
-            GVCustomerDetails.DataSource = DBCustomersDetails;
-            GVCustomerDetails.DataBind();
-
-
         }
         protected void saveBtnCust_Click(object sender, EventArgs e)
         {

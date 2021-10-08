@@ -12,37 +12,41 @@ namespace Purchase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            DbConnection dbConnection = new DbConnection();
-            DataTable dt = dbConnection.GetCustomerID();
-            DropDownListCustomerID.Items.Add("--Select--");
-            DropDownListSalesmanID.Items.Add("--Select--");
-            for (int i=0;i<dt.Rows.Count;i++)
+            if(!IsPostBack)
             {
-                DropDownListCustomerID.Items.Add(new ListItem(dt.Rows[i][0].ToString() + "-" + dt.Rows[i][1].ToString(), dt.Rows[i][0].ToString()));
-                DropDownListSalesmanID.Items.Add(new ListItem(dt.Rows[i][2].ToString(), dt.Rows[i][2].ToString()));
+                DbConnection dbConnection = new DbConnection();
+                DataTable dt = dbConnection.GetCustomerID();
+                DropDownListCustomerID.Items.Add("--Select--");
+                DropDownListSalesmanID.Items.Add("--Select--");
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    DropDownListCustomerID.Items.Add(new ListItem(dt.Rows[i][0].ToString() + "-" + dt.Rows[i][1].ToString(), dt.Rows[i][0].ToString()));
+                    DropDownListSalesmanID.Items.Add(new ListItem(dt.Rows[i][2].ToString(), dt.Rows[i][2].ToString()));
+                }
+                DataTable DbOrderDetails = dbConnection.GetOrderDetails();
+                GVOrderDetails.DataSource = DbOrderDetails;
+                GVOrderDetails.DataBind();
             }
-            DataTable DbOrderDetails = dbConnection.GetOrderDetails();
-            GVOrderDetails.DataSource = DbOrderDetails;
-            GVOrderDetails.DataBind();
+
         }
         protected void SaveBtn_Click(object sender, EventArgs e)
         {
             int customerID = Convert.ToInt32(DropDownListCustomerID.SelectedValue.ToString());
             int salesmanID = Convert.ToInt32(DropDownListSalesmanID.SelectedValue.ToString());
             DbConnection dbConnection = new DbConnection();
-            dbConnection.InsertOrderDetails(Convert.ToInt32(TxtPurchAmt.Text), TxtOrdDate.Text, customerID, salesmanID);
+            dbConnection.InsertOrderDetails(Convert.ToDouble(TxtPurchAmt.Text), TxtOrdDate.Text, customerID, salesmanID);
         }
         protected void ResetBtn_Click(object sender, EventArgs e)
         {
             TxtOrdDate.Text = string.Empty;
             TxtPurchAmt.Text = string.Empty;
-            DropDownListSalesmanID.SelectedValue = string.Empty;
-            DropDownListCustomerID.SelectedValue = string.Empty;
+            //DropDownListSalesmanID.Text = string.Empty;
+            //DropDownListCustomerID.Text = string.Empty;
         }
         protected void UpdateBtn_Click(object sender, EventArgs e)
         {
             DbConnection dbConnection = new DbConnection();
-            dbConnection.UpdateOrderDetails(Convert.ToInt32(LblOrderID.Text), Convert.ToInt32(TxtPurchAmt.Text), TxtOrdDate.Text, Convert.ToInt32(DropDownListCustomerID.Text), Convert.ToInt32(DropDownListSalesmanID.Text));
+            dbConnection.UpdateOrderDetails(Convert.ToInt32(LblOrderID.Text), Convert.ToDouble(TxtPurchAmt.Text), TxtOrdDate.Text, Convert.ToInt32(DropDownListCustomerID.Text), Convert.ToInt32(DropDownListSalesmanID.Text));
             DataTable dtOrderResults = dbConnection.GetOrderDetails(); 
             GVOrderDetails.DataSource = dtOrderResults;
             GVOrderDetails.DataBind();

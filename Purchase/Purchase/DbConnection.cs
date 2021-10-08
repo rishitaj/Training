@@ -147,54 +147,48 @@ namespace Purchase
 
         //Orders
         #region orders
-        public void InsertOrderDetails(int PurchaseAmt, string date, int CustomerID,int salesmanID)
+        public void InsertOrderDetails(double PurchaseAmt, string date, int CustomerID,int salesmanID)
         {
-            SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-Q8TO498\SQLEXPRESS;Initial Catalog=Purchase;Integrated Security=True");
-            SqlCommand sqlCommand = new SqlCommand("insert into orders(purch_amt, ord_date, customer_ID, salesman_id) values(" + PurchaseAmt + ",'" + date + "', " + CustomerID + ", "+salesmanID+")", sqlConnection);
-            sqlConnection.Open();
-            sqlCommand.ExecuteNonQuery();
-            sqlConnection.Close();
+            string insertquery= "insert into orders(purch_amt, ord_date, customer_ID, salesman_id) values(" + PurchaseAmt + ",'" + date + "', " + CustomerID + ", " + salesmanID + ")";
+            // SqlCommand sqlCommand = new SqlCommand("insert into orders(purch_amt, ord_date, customer_ID, salesman_id) values(" + PurchaseAmt + ",'" + date + "', " + CustomerID + ", "+salesmanID+")", sqlConnection);
+            DataTable dt = ExecuteQry(insertquery);
         }
         public DataTable GetOrderDetails()
         {
-            SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-Q8TO498\SQLEXPRESS ; Initial Catalog=Purchase ; Integrated Security=True");
-            SqlCommand sqlCommand = new SqlCommand("select * from Orders", sqlConnection);
-            sqlConnection.Open();
-            SqlDataReader dr = sqlCommand.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(dr);
-            sqlConnection.Close();
+            //SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-Q8TO498\SQLEXPRESS ; Initial Catalog=Purchase ; Integrated Security=True");
+            //SqlCommand sqlCommand = new SqlCommand("select * from Orders", sqlConnection);
+            string selectquery = "select * from Orders";
+            DataTable dt = ExecuteQry(selectquery);
             return dt;
         }
         public DataTable GetOrderDetailsbyID(int OrderID)
         {
-            SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-Q8TO498\SQLEXPRESS ; Initial Catalog=Purchase ; Integrated Security=True");
-            SqlCommand sqlCommand = new SqlCommand("select * from Orders where ord_no=" + OrderID + "", sqlConnection);
-            sqlConnection.Open();
-            SqlDataReader dr = sqlCommand.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(dr);
-            sqlConnection.Close();
+            //SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-Q8TO498\SQLEXPRESS ; Initial Catalog=Purchase ; Integrated Security=True");
+            //SqlCommand sqlCommand = new SqlCommand("select * from Orders where ord_no=" + OrderID + "", sqlConnection);
+            string selectquery = "select * from Orders where ord_no=" + OrderID + "";
+            DataTable dt = ExecuteQry(selectquery);
             return dt;
         }
         public void DeleteOrderDetails(int OrderID)
         {
-            SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-Q8TO498\SQLEXPRESS ; Initial Catalog=Purchase ; Integrated Security=True");
-            SqlCommand sqlCommand = new SqlCommand("delete from Orders where ord_no=" + OrderID + "", sqlConnection);
-            sqlConnection.Open();
-            sqlCommand.ExecuteNonQuery();
-            sqlConnection.Close();
+            string deletequery = "delete from Orders where ord_no=" + OrderID + "";
+            DataTable dt = ExecuteQry(deletequery);
         }
-        public void UpdateOrderDetails(int OrderID, int Purch_Amt, string Date, int CustID, int SalesmanID)
+        public void UpdateOrderDetails(int OrderID, double Purch_Amt, string Date, int CustID, int SalesmanID)
         {
-            SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-Q8TO498\SQLEXPRESS ; Initial Catalog=Purchase ; Integrated Security=True");
-            SqlCommand sqlCommand = new SqlCommand("update orders set Purch_amt=" + Purch_Amt + ",ord_date='" + Date + "',Customer_ID=" + CustID + ",salesman_id=" + SalesmanID + " where ord_no=" + OrderID + "", sqlConnection);
-            sqlConnection.Open();
-            sqlCommand.ExecuteNonQuery();
-            sqlConnection.Close();
-
+            string updatequery = "update orders set Purch_amt = " + Purch_Amt + ", ord_date = '" + Date + "', Customer_ID = " + CustID + ", salesman_id = " + SalesmanID + " where ord_no = " + OrderID + "";
+            DataTable dt = ExecuteQry(updatequery);
         }
+        public DataTable ExecuteQry(string query)
+        {
+            SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-Q8TO498\SQLEXPRESS; Initial Catalog = Purchase; Integrated Security = True");
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
+            DataTable dt = new DataTable();
+            sqlDataAdapter.Fill(dt);
+            return dt;
+        }
+ 
 
-            #endregion  
+        #endregion
     }
 }
