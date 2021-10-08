@@ -28,8 +28,8 @@ namespace Purchase
             commission = TxtSalesmanCommission.Text;
             DbConnection DbObj = new DbConnection();
             DbObj.InsertSalesman(salesmanname, salesmancity, commission);
-            DataTable dtSalesmanResults = DbObj.GetSalesman();
 
+            DataTable dtSalesmanResults = DbObj.GetSalesman();
             GVSalesmanDetails.DataSource = dtSalesmanResults;
             GVSalesmanDetails.DataBind();
 
@@ -47,15 +47,38 @@ namespace Purchase
             {
                 DbConnection dbConnection = new DbConnection();
                 DataTable dt = dbConnection.GetSalesmanbyID(salesmanid);
+                TxtSalesmanName.Text = dt.Rows[0][1].ToString();
+                TxtSalesmanCity.Text = dt.Rows[0][2].ToString();
+                TxtSalesmanCommission.Text = dt.Rows[0][3].ToString();
+                LblsalesmanID.Text = dt.Rows[0][0].ToString();
             }
             else
             {
-
+                DbConnection dbConnection = new DbConnection();
+                dbConnection.DeleteSalesman(salesmanid);
+                DataTable dtSalesmanResults = dbConnection.GetSalesman();
+                GVSalesmanDetails.DataSource = dtSalesmanResults;
+                GVSalesmanDetails.DataBind();
             }
+        }
+        protected void BtnUpdate_Click(object sender, EventArgs e)
+        {
+            DbConnection dbConnection = new DbConnection();
+            dbConnection.UpdateSalesman(Convert.ToInt32(LblsalesmanID.Text), TxtSalesmanName.Text, TxtSalesmanCity.Text, TxtSalesmanCommission.Text);
+            DataTable dtSalesmanResults = dbConnection.GetSalesman();
+            GVSalesmanDetails.DataSource = dtSalesmanResults;
+            GVSalesmanDetails.DataBind();
         }
         protected void GVSalesmanDetails_RowEditing(object sender, GridViewEditEventArgs e)
         {
 
         }
+
+        protected void GVSalesmanDetails_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+
+        }
+
+
     }
 }

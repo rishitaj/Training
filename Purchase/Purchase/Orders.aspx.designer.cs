@@ -24,15 +24,6 @@ namespace Purchase
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// txtOrdID control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOrdID;
-
-        /// <summary>
         /// TxtPurchAmt control.
         /// </summary>
         /// <remarks>
@@ -40,6 +31,15 @@ namespace Purchase
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtPurchAmt;
+
+        /// <summary>
+        /// LblOrderID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblOrderID;
 
         /// <summary>
         /// TxtOrdDate control.
@@ -51,39 +51,57 @@ namespace Purchase
         protected global::System.Web.UI.WebControls.TextBox TxtOrdDate;
 
         /// <summary>
-        /// TxtCustID control.
+        /// DropDownListCustomerID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtCustID;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListCustomerID;
 
         /// <summary>
-        /// TxtSalesmanID control.
+        /// DropDownListSalesmanID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtSalesmanID;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListSalesmanID;
 
         /// <summary>
-        /// Button1 control.
+        /// SaveBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button SaveBtn;
 
         /// <summary>
-        /// Button2 control.
+        /// ResetBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button ResetBtn;
+
+        /// <summary>
+        /// UpdateBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button UpdateBtn;
+
+        /// <summary>
+        /// GVOrderDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GVOrderDetails;
     }
 }

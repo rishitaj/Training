@@ -16,7 +16,9 @@
                 </tr>--%>
                 <tr>
                     <td>Salesman Name</td>
-                    <td><asp:TextBox ID="TxtSalesmanName" runat="server"></asp:TextBox></td>
+                    <td><asp:TextBox ID="TxtSalesmanName" runat="server"></asp:TextBox>
+                        <asp:Label ID="LblsalesmanID" runat="server" Text="ID"></asp:Label>
+                    </td>
                 </tr>
                 <tr>
                     <td>City</td>
@@ -29,15 +31,17 @@
                 <tr>
                     <td></td>
                     <td><asp:Button ID="SaveBtn" runat="server" Text="Save" OnClick="SaveBtn_Click" />
-                        <asp:Button ID="ResetBtn" runat="server" Text="Reset" OnClick="ResetBtn_Click" /></td>
+                        <asp:Button ID="ResetBtn" runat="server" Text="Reset" OnClick="ResetBtn_Click" />
+                        <asp:Button ID="Button1" runat="server" OnClick="BtnUpdate_Click" Text="Update" />
+                    </td>
                 </tr>
             </table>
             <div>
-                <asp:GridView ID="GVSalesmanDetails" runat="server" AutoGenerateColumns="False" OnRowCommand="GVsalesmanDetails_RowCommand" OnRowEditing="GVSalesmanDetails_RowEditing">
+                <asp:GridView ID="GVSalesmanDetails" runat="server" AutoGenerateColumns="False" OnRowCommand="GVsalesmanDetails_RowCommand" OnRowEditing="GVSalesmanDetails_RowEditing" OnRowDeleting="GVSalesmanDetails_RowDeleting">
                     <Columns>
-                        <asp:BoundField DataField="salesmanID" HeaderText="Salesman_ID" />
-                        <asp:BoundField DataField="SalesmanName" HeaderText="SalesmanName" />
-                        <asp:BoundField DataField="salesmanCity" HeaderText="SalesmanCity" />
+                        <asp:BoundField DataField="salesman_ID" HeaderText="Salesman_ID" />
+                        <asp:BoundField DataField="Name" HeaderText="SalesmanName" />
+                        <asp:BoundField DataField="City" HeaderText="SalesmanCity" />
                         <asp:BoundField DataField="commission" HeaderText="Commission" SortExpression="commission" />
                         <asp:TemplateField HeaderText="Edit">
                             <ItemTemplate>
